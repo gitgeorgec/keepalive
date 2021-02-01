@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import KeepAlive, { AliveScope } from './components/KeepAlive'
 import './App.css';
+import { useState } from 'react';
+import Count from './components/Count';
 
 function App() {
+  const [isShow, setIsShow] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AliveScope>
+      <div>
+        <div>
+          <button onClick={() => setIsShow(!isShow)}>toggle show</button>
+        </div>
+        {isShow && <Count />}
+        {isShow && <KeepAlive id="test">
+          <Count />
+        </KeepAlive>}
+      </div>
+    </AliveScope>
   );
 }
 
